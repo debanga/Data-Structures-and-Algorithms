@@ -1,3 +1,4 @@
+// Check if k-th bit is set or not
 #include <iostream>
 
 bool right_shift_algo(int num, int k) {
