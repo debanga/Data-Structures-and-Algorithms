@@ -20,7 +20,6 @@ int posOfRightMostDiffBit(int m, int n)
     
 }
 
-
 // { Driver Code Starts.
 
 // Driver code
