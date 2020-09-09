@@ -53,6 +53,9 @@ unsigned int getFirstSetBit(int n){
 // Driver code
 int main()
 {
+    // eg.
+    // 1
+    // 18
     int t;
     cin>>t; // testcases
     while(t--)
