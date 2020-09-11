@@ -25,12 +25,11 @@ void insertion(int arr[], int n) {
                 break;
             }
         }
-        print(arr, 5);
     }
 }
 
 int main() {
     int arr[] = {4,1,3,9,2};
     insertion(arr, 5);
-    //print(arr, 5);
+    print(arr, 5);
 }
