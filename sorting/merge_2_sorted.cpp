@@ -9,7 +9,8 @@ void print(int arr[], int n) {
     std::cout << std::endl;
 }
 
-void merge(int arr1[], int arr2[], int m, int n) {
+// O(n*m), S(1)
+void merge1(int arr1[], int arr2[], int m, int n) {
     for (int i=0; i<m; ++i) {
         if (arr1[i]>arr2[0]) {
             //swap
@@ -35,10 +36,33 @@ void merge(int arr1[], int arr2[], int m, int n) {
     }
 }
 
+// O(m+n), S(m+n) if we store in a new array.
+void merge2(int arr1[], int arr2[], int m, int n) {
+    int i {0}, j {0};
+    while(i<=m-1 || j<=n-1) {
+        if (arr1[i]<arr2[j]) {
+            cout<< arr1[i] << " ";
+            ++i;
+        }
+        else {
+            cout << arr2[j] << " ";
+            ++j;
+        }
+    }
+    if (i==m-1) {
+        while(j<=n-1) { cout << arr2[j]; ++j;}
+    }
+    if (j==n-1) {
+        while(i<=m-1) { cout << arr1[i]; ++i;}
+    }
+}
+
 int main() {
     int arr1[] = {1, 3, 8, 12};
     int arr2[] = {2, 6, 7, 11};
-    merge(arr1, arr2, 4, 4);
+    merge1(arr1, arr2, 4, 4);
     print(arr1, 4);
     print(arr2, 4);
+
+    merge2(arr1, arr2, 4, 4);
 }
