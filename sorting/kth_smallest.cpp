@@ -27,8 +27,10 @@ int find_kth_smallest1(int arr[], int k, int n) {
     return arr[k-1];
 }
 
-// Using partition
+// Using partition: Quickselect
 // Note: can be further optimized using tail call allimination, see @geeks4geeks
+// Note: the order of the original array is changed, if you want to keep the 
+// original array you have to copy
 int find_kth_smallest2(int arr[], int k, int l, int r) {
     int p {partition(arr, l, r)};
     if ( p == k-1) {
@@ -61,7 +63,7 @@ int find_kth_smallest3(int arr[], int k, int l, int r) {
             }
         }
     }
-    return arr[l];
+    return -1; // not present
 }
 
 
