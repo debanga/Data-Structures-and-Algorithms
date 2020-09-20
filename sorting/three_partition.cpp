@@ -66,8 +66,6 @@ void dutch_flag(int arr[], int n, int rl, int rh) {
     int m = 0;
     int h = n-1;
 
-    010
-
     // 0000 (l) 1111 0 (m) xxxx (h) 2222
     while (m<=h) {
         int c {0};
