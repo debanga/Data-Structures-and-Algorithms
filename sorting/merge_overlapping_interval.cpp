@@ -53,18 +53,27 @@ vector<Interval> merge_instervals(Interval arr[], int n) {
 
     for (int i=0; i<n; ++i) {
         if (index[i]) {
+            cout << "==" << i << endl;
             Interval I = arr[i];
-            index[i] = false;
             for (int j=0; j<n; ++j) {
-                if (index[j]) {
-                    Interval t = to_merge(I, arr[j]);
-                    if (t.start!=-1) {
-                        index[j] = false;
-                        I = t;
+                if (i!=j) {
+                    if (index[j]) {
+                        cout << j << endl;
+                        Interval t = to_merge(I, arr[j]);
+                        if (t.start!=-1) {
+                            cout << "--" << j << endl;
+                            index[j] = false;
+                            I = t;
+                        }
                     }
                 }
             }
-            v.push_back(I);
+            arr[i] = I;
+        }
+    }
+    for (int i=0; i<n; ++i) {
+        if (index[i]) {
+            v.push_back(arr[i]);
         }
     }
     return v;
@@ -73,7 +82,7 @@ vector<Interval> merge_instervals(Interval arr[], int n) {
 int main() {
     Interval arr[] = {{5,10}, {2,3}, {6,8}, {1,7}};
     
-    //Interval I = to_merge(arr[0], arr[1]);
+    //Interval I = to_merge({1,10}, {2,3});
     //cout << "[" << I.start << "," << I.end << "]" << endl;
 
     vector<Interval> v =merge_instervals(arr, 4);
