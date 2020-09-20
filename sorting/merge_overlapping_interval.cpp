@@ -10,10 +10,10 @@ struct Interval {
     int end; 
 };
 
-template <class T>
-void print_array(T arr[], int n) {
-    for (int i=0; i<n; ++i) {
-        cout << arr[i] << " ";
+
+void print_array(vector<Interval> v) {
+    for (int i=0; i<v.size(); ++i) {
+        cout << "[" << v[i].start << "," << v[i].end << "] ";
     }
     cout << endl;
 }
@@ -32,12 +32,12 @@ Interval to_merge(Interval a, Interval b) {
         high = a;
     }
 
-    if (b.start <= a.end) {
-        if (b.end<=a.end) {
-            return {a.start, a.end};
+    if (high.start <= low.end) {
+        if (high.end<=low.end) {
+            return {low.start, low.end};
         }
         else {
-            return {a.start, b.end};
+            return {low.start, high.end};
         }
     }
     else {
@@ -45,43 +45,38 @@ Interval to_merge(Interval a, Interval b) {
     } 
 }
 
-// Naive O(N^2), S(N)
-void merge_instervals(Interval arr[], int n) {
+// Naive 
+vector<Interval> merge_instervals(Interval arr[], int n) {
     bool index[n];
     fill_n(index, n, true);
+    vector<Interval> v;
+
     for (int i=0; i<n; ++i) {
         if (index[i]) {
-            bool flag = false;
-            Interval I {arr[i]};
+            Interval I = arr[i];
             index[i] = false;
-            int count {0};
-            for (int j=i+1; j<n; ++j) {
+            for (int j=0; j<n; ++j) {
                 if (index[j]) {
-                    //cout << i << endl;
-                    Interval temp;
-                    temp = to_merge(I, arr[j]);
-                    if (temp.start!=-1) {
-                        I = temp;
-                        flag = true;
-                        count++;
+                    Interval t = to_merge(I, arr[j]);
+                    if (t.start!=-1) {
                         index[j] = false;
+                        I = t;
                     }
                 }
             }
-            if (flag || count==0) {
-                //print_array(index, n);
-                cout << "[" << I.start << "," << I.end << "]" << endl;
-            }
+            v.push_back(I);
         }
     }
+    return v;
 }
 
 int main() {
-    Interval arr[] = {{1,2}, {3,4}, {4,5}, {4,6}, {11, 14}};
+    Interval arr[] = {{5,10}, {2,3}, {6,8}, {1,7}};
     
     //Interval I = to_merge(arr[0], arr[1]);
     //cout << "[" << I.start << "," << I.end << "]" << endl;
 
-    merge_instervals(arr, 5);
+    vector<Interval> v =merge_instervals(arr, 4);
+    print_array(v);
 
 }
