@@ -70,28 +70,35 @@ void counting_sort2(int arr[], int n, int k) {
     idx = 0;
     for (int i=0; i<k; ++i) {
         int d = count_arr[i];
+        int count {0};
         if (d!=0) {
-            while(arr[d]!=-1) {
+            while(d!=-1) {
+                d = count_arr[d];
                 arr[idx] = i;
                 idx++;
+                count++;
             }
             arr[idx] = i;
             idx++;
+            if (count>0) {
+                cout << i << " repeated " << count+1 << " times...!" << endl;
+            }
         }
     }
-
-
 }
 
 int main() {
     int arr1[] = {1, 4, 4, 1, 0, 1};
     int k1 = 5;
-    counting_sort(arr1, 6, k1);
+    cout << "Example 1" << endl;
+    counting_sort2(arr1, 6, k1);
     print_array(arr1, 6);
+    cout << endl;
 
-    int arr2[] = {2, 1, 8, 9, 4};
+    int arr2[] = {2, 1, 8, 9, 4, 8};
     int k2 = 10;
-    counting_sort(arr2, 5, k2);
-    print_array(arr2, 5);
+    cout << "Example 2" << endl;
+    counting_sort2(arr2, 6, k2);
+    print_array(arr2, 6);
     
 }
