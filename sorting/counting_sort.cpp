@@ -11,7 +11,7 @@ void print_array(int arr[], int n) {
     cout << endl;
 }
 
-// O(n+k)
+// Naive: O(n+k) object identity not preserved
 void counting_sort(int arr[], int n, int k) {
     int count_arr[k];
 
@@ -35,6 +35,53 @@ void counting_sort(int arr[], int n, int k) {
     }
 }
 
+// 
+void counting_sort2(int arr[], int n, int k) {
+    int count_arr[n+k];
+
+    // O(k)
+    for (int i=0; i<n+k; ++i) {
+        count_arr[i] = 0;
+    }
+
+    // 
+    int idx {k};
+    for (int i=0; i<n; ++i) {
+        if (count_arr[arr[i]]==0) {
+            count_arr[arr[i]] = -1;
+        }
+        else if (count_arr[arr[i]]==-1) {
+            count_arr[arr[i]] = idx;
+            count_arr[idx] = -1;
+            idx++;
+        }
+        else {
+            int d = arr[i];
+            while(count_arr[d]!=-1) {
+                d = count_arr[d];
+            }
+            count_arr[d] = idx;
+            count_arr[idx] = -1;
+            idx++;
+        }
+    }
+
+    //
+    idx = 0;
+    for (int i=0; i<k; ++i) {
+        int d = count_arr[i];
+        if (d!=0) {
+            while(arr[d]!=-1) {
+                arr[idx] = i;
+                idx++;
+            }
+            arr[idx] = i;
+            idx++;
+        }
+    }
+
+
+}
 
 int main() {
     int arr1[] = {1, 4, 4, 1, 0, 1};
