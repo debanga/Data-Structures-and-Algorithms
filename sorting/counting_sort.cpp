@@ -11,16 +11,21 @@ void print_array(int arr[], int n) {
     cout << endl;
 }
 
+// O(n+k)
 void counting_sort(int arr[], int n, int k) {
     int count_arr[k];
+
+    // O(k)
     for (int i=0; i<k; ++i) {
         count_arr[i] = 0;
     }
 
+    // O(n)
     for (int i=0; i<n; ++i) {
         count_arr[arr[i]]++;
     }
 
+    // O(n+k)
     int idx {0};
     for (int i=0; i<k; ++i) {
         for (int j=0; j<count_arr[i]; ++j) {
