@@ -12,6 +12,7 @@ void print_array(int arr[], int n) {
 }
 
 // Naive: O(n+k) object identity not preserved
+//
 void counting_sort(int arr[], int n, int k) {
     int count_arr[k];
 
@@ -35,55 +36,39 @@ void counting_sort(int arr[], int n, int k) {
     }
 }
 
-// 
+// Object-preserving counting sort: 
+// Sorts real objects rather than just repeated adding
+// O(n+k), S(n+k)
 void counting_sort2(int arr[], int n, int k) {
-    int count_arr[n+k];
-
-    // O(k)
-    for (int i=0; i<n+k; ++i) {
+    int count_arr[k];
+    for (int i=0; i<k; ++i) {
         count_arr[i] = 0;
     }
 
-    // 
-    int idx {k};
+    // count: O(n)
     for (int i=0; i<n; ++i) {
-        if (count_arr[arr[i]]==0) {
-            count_arr[arr[i]] = -1;
-        }
-        else if (count_arr[arr[i]]==-1) {
-            count_arr[arr[i]] = idx;
-            count_arr[idx] = -1;
-            idx++;
-        }
-        else {
-            int d = arr[i];
-            while(count_arr[d]!=-1) {
-                d = count_arr[d];
-            }
-            count_arr[d] = idx;
-            count_arr[idx] = -1;
-            idx++;
-        }
+        count_arr[arr[i]]++;
     }
 
-    //
-    idx = 0;
-    for (int i=0; i<k; ++i) {
-        int d = count_arr[i];
-        int count {0};
-        if (d!=0) {
-            while(d!=-1) {
-                d = count_arr[d];
-                arr[idx] = i;
-                idx++;
-                count++;
-            }
-            arr[idx] = i;
-            idx++;
-            if (count>0) {
-                cout << i << " repeated " << count+1 << " times...!" << endl;
-            }
-        }
+    // integrate count_arr
+    for (int i=1; i<k; ++i) {
+        count_arr[i] = count_arr[i] + count_arr[i-1]; 
+    }
+
+    // O(n+k)
+    int output[n]; // S(n)
+    for (int i=n-1; i>=0; --i) {
+        int d = arr[i];
+        int idx = count_arr[d] - 1;
+        count_arr[d]--;
+
+        output[idx] = arr[i]; // so we are putting actual value
+            // instead of just repeated adding of numbers
+    }
+
+    // copy to original array
+    for (int i=0; i<n; ++i) {
+        arr[i] = output[i];
     }
 }
 
@@ -100,5 +85,4 @@ int main() {
     cout << "Example 2" << endl;
     counting_sort2(arr2, 6, k2);
     print_array(arr2, 6);
-    
 }
