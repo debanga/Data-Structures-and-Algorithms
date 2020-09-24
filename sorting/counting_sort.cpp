@@ -85,4 +85,10 @@ int main() {
     cout << "Example 2" << endl;
     counting_sort2(arr2, 6, k2);
     print_array(arr2, 6);
+
+    int arr3[] = {0, 1, 0, 0, 1, 0, 1};
+    int k3 = 2;
+    cout << "Example 2" << endl;
+    counting_sort2(arr3, 7, k2);
+    print_array(arr3, 7);
 }
