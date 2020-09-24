@@ -43,8 +43,7 @@ void counting_sort(int arr[], int n, int k) {
         int d = find_kth_digit(arr[i], k);
         count[d]++;
     }
-    
-    
+      
     // integrate counts
     for (int i=1; i<10; ++i) {
         count[i] = count[i] + count[i-1]; 
