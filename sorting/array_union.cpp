@@ -55,3 +55,49 @@ int main() {
     int arr2[] = {1, 2, 3, 5};
     array_union(arr1, arr2, 6, 4);
 }
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void print_vector(vector<int> v) {
+    for (int i=0; i<v.size(); ++i) {
+        cout << v[i] << " ";
+    }
+    cout << endl;
+}
+
+vector<int> printIntersection(int arr1[], int arr2[], int N, int M)  {
+    int i=0;
+    int j=0;
+
+    vector<int> v;
+    int c = -1;
+    int temp;
+
+    while (i<=N-1 && j<= M-1) {
+        if (arr1[i]<=arr2[j]) {
+            if (arr1[i]==temp) 
+
+            i++;
+        }
+        else {
+            j++;
+        }
+
+
+    }
+
+
+
+}
+
+int main() {
+    int arr[] = {1, 2, 3, 4};
+    int brr[] = {2, 4, 6, 7, 8};
+
+    vector<int> res;
+    res = printIntersection(arr, brr, 4, 5);
+    print_vector(res);
+
+    return 0;
+}
