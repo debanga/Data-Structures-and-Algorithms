@@ -17,45 +17,37 @@ void print_array(int arr[], int n) {
     cout << endl;
 }
 
-int merge(int arr1[], int arr2[], int M, int N) {
-
-
-    for (int i=0; i<M; ++i) {
-        arr1[i] = 100000*log(arr1[i])/arr1[i];
+bool compare(int x, int y) {
+    float a = log2(x)/x;
+    float b = log2(y)/y;
+    if (a<b) {
+        return true;
     }
-    for (int i=0; i<N; ++i) {
-        arr2[i] = 100000*log(arr2[i])/arr2[i];
-    }
+    return false;
+}
 
-    sort(arr1, arr1+M);
-    sort(arr2, arr2+N);
-    print_array(arr1, M);
-    print_array(arr2, N);
+long long countPairs(int X[], int Y[], int m, int n) {
+    sort(X, X+m, compare);
+    sort(Y, Y+n, compare);
 
     int i = 0;
     int j = 0;
 
     int val = 0;
     int c = 0;
-    while(i<=M-1 && j<=N-1) {
-        if (arr1[i]<=arr2[j]) {
+    while(i<=m-1 && j<=n-1) {
+        float a = log2(X[i])/X[i];
+        float b = log2(Y[j])/Y[j];
+        if (a<=b) {
             i++;
-            if (i>0) {
-                if (arr1[i]!=arr1[i-1]) {
-                    c += val;
-                }
-            }
+            c += val;
         }
         else {
             j++;
-            if (j>0) {
-                if (arr2[j]!=arr2[j-1]) {
-                    val++;
-                }
-            }
+            val++;
         }
     }
-    while(i<=M-1) {
+    while(i<=m-1) {
         i++;
         c += val;
     }
@@ -64,11 +56,11 @@ int merge(int arr1[], int arr2[], int M, int N) {
 }
 
 int main() {
-    int arr1[] = {2, 1, 6};
-    int arr2[] = {1, 5};
-    int M = 3;
-    int N = 2;
+    int arr1[] = {2, 3, 4, 5};
+    int arr2[] = {1, 2, 3};
+    int M = 4;
+    int N = 3;
 
-    cout << merge(arr1, arr2, M, N) << endl;
+    cout << countPairs(arr1, arr2, M, N) << endl;
 
 }
