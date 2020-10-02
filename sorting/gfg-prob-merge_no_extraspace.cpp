@@ -9,7 +9,7 @@ void print_array(int arr[], int n) {
     cout << endl;
 }
 
-// O(n*m*log(m)) or O(m*n)
+// O(n*m*log(m)) 
 void merge0(int arr1[], int arr2[], int n, int m) 
 { 
 
@@ -23,13 +23,11 @@ void merge0(int arr1[], int arr2[], int n, int m)
 
             // sort array2
             sort(arr2,arr2+m);
-            // Note: This can be further optimized by shifting and
-            // putting it in the right place which is O(m) rather
-            // than sorting which is O(mlog(m))
         }
     }
     
 } 
+
 
 
 // O((n+m)*log(n+m)): @todo: comb sort
