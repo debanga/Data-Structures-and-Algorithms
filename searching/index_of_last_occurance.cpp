@@ -13,7 +13,7 @@ int find_last_occurance(int arr[], int n, int x) {
         else if (arr[mid]<x) {
             l = mid+1;
         }
-        else if (arr[mid]==x) {
+        else {
             if (mid==n-1 || (arr[mid]!=arr[mid+1])) {
                 return mid;
             }
