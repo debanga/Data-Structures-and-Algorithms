@@ -23,7 +23,6 @@ int first_occurance(int arr[], int n, int x) {
             }
         }
     }
-
     return -1;
 }
 
