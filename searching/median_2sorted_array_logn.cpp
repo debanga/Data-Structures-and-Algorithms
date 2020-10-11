@@ -16,35 +16,51 @@ float find_median(int arr1[], int arr2[], int n1, int n2) {
         is_odd = true;
     }
     
-    while(left<right) {
+    while(left<right+2) {
         mid = left + (right-left)/2;
         j = find_j(mid, n1, n2);
  
-        if ((arr1[mid-1]<arr1[mid] && arr1[mid-1]<arr2[j]) && (arr2[j-1]<arr1[mid] && arr2[j-1]<arr2[j])) {
+        int L1 = mid==0 ? INT16_MIN : arr1[mid-1];
+        int L2 = j==0 ? INT16_MIN : arr2[j-1];
+        int R1 = mid==n1 ? INT16_MAX : arr1[mid];
+        int R2 = j==n2 ? INT16_MAX : arr2[j];
+        
+        //cout << "[" << mid << "," << j << "]" << endl;
+        //cout << "=[" << L1 << "," << L2 << "]" << endl;
+        //cout << "==[" << R1 << "," << R2 << "]" << endl;
+
+        if (max(L1, L2)<R1 && max(L1, L2)<R2) {
             if (is_odd) {
-                return max(arr1[mid-1],arr2[j-1]);
+                return max(L1, L2);
             }
             else {
-                cout << "[" << mid << "," << j << "]" << endl;
-                return (max(arr1[mid-1],arr2[j-1])+min(arr1[mid],arr2[j]))/2.0;
+                return (max(L1, L2)+min(R1, R2))/2.0;
             }
         }
-        else if (arr2[j-1]>arr1[mid]) {
+        else if (L2>R1) {
             left = mid+1;
         }
         else {
             right = mid-1;
         }
     }
+    return -1;
 
 
 
 }
 
 int main() {
+    /*
     int arr1[] = {10, 20, 30, 40, 50};
     int arr2[] = {5, 15, 25, 35, 45, 55, 65, 75, 85};
     int n1 = 5, n2 = 9;
+    cout << find_median(arr1, arr2, n1, n2) << endl;
+    */
+    
+    int arr1[] = {10, 90};
+    int arr2[] = {5, 15, 25, 35, 45, 55, 65, 75, 85};
+    int n1 = 2, n2 = 9;
     cout << find_median(arr1, arr2, n1, n2) << endl;
 
 }
