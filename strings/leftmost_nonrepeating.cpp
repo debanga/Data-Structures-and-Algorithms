@@ -2,9 +2,11 @@
 #include <string>
 using namespace std;
 
+const int CHAR = 256;
+
 
 int leftmost_nonrepeating(string str) {
-    int count[256] = {0};
+    int count[CHAR] = {0};
 
     for (int i=0; i<str.length(); ++i) {
         count[str[i]]++;
@@ -20,8 +22,8 @@ int leftmost_nonrepeating(string str) {
 
 
 int leftmost_nonrepeating_1(string str) {
-    int flag[256];
-    fill(flag, flag+256, -1);
+    int flag[CHAR];
+    fill(flag, flag+CHAR, -1);
 
     for (int i=0; i<str.length(); ++i) {
         if (flag[str[i]]==-1) {
@@ -33,7 +35,7 @@ int leftmost_nonrepeating_1(string str) {
     }
 
     int min = INT8_MAX;
-    for (int i=0; i<256; ++i) {
+    for (int i=0; i<CHAR; ++i) {
         if(flag[i]<min && flag[i]>=0) {
             min = flag[i];
         }
