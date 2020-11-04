@@ -22,35 +22,49 @@ int leftmost_repeat_index(string str) {
 
 
 int leftmost_repeat_index_1(string str) {
-    int count[CHAR] = {0};
     int map[CHAR];
     fill(map, map+CHAR, -1);
 
+    int min = INT8_MAX;
+    int idx = -1;
     for (int i=0; i<str.length(); ++i) {
         if (map[str[i]-'a']==-1) {
             map[str[i]-'a']=i;
         }
-
-        count[str[i]-'a']++;
-    }
-
-    int min = 100000;
-    int idx = -1;
-    for (int i=0; i<str.length(); ++i) {
-        if (count[i]>1 && map[i]<min) {
-            min = map[i];
-            idx = i;
+        else {
+            if (map[str[i]-'a']<min) {
+                min = map[str[i]-'a'];
+            }
         }
     }
-    if (idx>-1) {
-        return idx;
+    if (min==INT8_MAX) {
+        return -1;
     }
-    return -1;
+    return min;
+}
+
+
+// Most efficient
+int leftmost_repeat_index_2(string str) {
+    bool flag[CHAR];
+    fill(flag, flag+CHAR, false);
+
+    int min = -1;
+    for (int i=str.length()-1; i>=0; --i) {
+        if (!flag[str[i]-'a']) {
+            flag[str[i]-'a'] = true;
+        }
+        else {
+            min = i;
+        }
+    }
+    return min;
 }
 
 
 int main() {
-    string str = "abbdedd";
+    string str = "abbced";
     cout << leftmost_repeat_index(str) << endl;
     cout << leftmost_repeat_index_1(str) << endl;
+    cout << leftmost_repeat_index_2(str) << endl;
 }
