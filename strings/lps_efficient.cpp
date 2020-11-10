@@ -33,7 +33,7 @@ void FindLPS(string str) {
 
 
 int main() {
-    string str = "abcbabca";
+    string str = "aaabaaaac";
     FindLPS(str);
 
 }
